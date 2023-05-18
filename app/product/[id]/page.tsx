@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { SearchParamTypes } from "@/types/SearchParamsTypes"
 import formatPrice from "@/util/PriceFormat"
+import AddCart from "./AddCart"
 
 //setup of dynamic page that fetches product data and displays it
 export default async function Product({ searchParams }: SearchParamTypes) {
@@ -25,9 +26,7 @@ export default async function Product({ searchParams }: SearchParamTypes) {
                 </p>
             </div>
             {/*cart button coming */}
-            <button className="my-12 text-white py-2 px-6 rounded-md bg-teal-800">
-                add to cart
-                </button>
+            <AddCart {...searchParams} />
             </div>
         </div>
     )
