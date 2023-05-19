@@ -7,12 +7,13 @@ import AddCart from "./AddCart"
 export default async function Product({ searchParams }: SearchParamTypes) {
     return(
         //fart out the image
-        <div className="flex justify-between gap-24 p-12 text-slate-700">
+        <div className="flex flex-col 2xl:flex-row items-center justify-between gap-24 text-slate-700">
             <Image
                 src={searchParams.image}
                 alt={searchParams.name}
                 width={600}
                 height={600} 
+                className="w-full"
             />
             {/* output the data for product name and its description*/}
             <div className="font-medium text-slate-700">
