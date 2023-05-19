@@ -53,7 +53,7 @@ export const useCartStore = create<CartState>()(
                     return {cart: filteredCart}
                 }
             }),
-            setPaymentIntent: (val) => ((state) => ({paymentIntent: val})),
+            setPaymentIntent: (val) => set((state) => ({paymentIntent: val})),
             setCheckout: (val) => set((state) => ({onCheckout: val}))
         }),
         { name: 'cart-store' }
