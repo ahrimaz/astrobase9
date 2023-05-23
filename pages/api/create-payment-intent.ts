@@ -1,5 +1,5 @@
 import Stripe from "stripe"
-import {NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest, NextApiResponse } from "next"
 import { authOptions } from "./auth/[...nextauth]"
 import { getServerSession } from "next-auth"
 import { AddCartType } from "@/types/AddCartType"
@@ -18,23 +18,26 @@ const calculateOrderAmount = (items: AddCartType[]) => {
     return totalPrice
 }
 
-export default async function handler(req: NextApiRequest,res: NextApiResponse){
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+    ) {
     //get the user
-    const userSession = await getServerSession(req,res,authOptions)
-    if(!userSession?.user) {
+    const userSession = await getServerSession(req, res, authOptions)
+    if (!userSession?.user) {
         res.status(403).json({message: 'not logged in'})
         return
     }
     //get data from body
-    const {items, payment_intend_id} = req.body
-    console.log(items, payment_intend_id)
+    const {items, payment_intent_id} = req.body
+    console.log(items, payment_intent_id)
     //create order data
     const orderData = {
         user: { connect: {id: userSession.user?.id} },
         amount: calculateOrderAmount(items),
         currency: 'usd',
         status: 'pending',
-        paymentIntentId: payment_intend_id,
+        paymentIntentId: payment_intent_id,
         products: {
             create: items.map((item) => ({
                 name: item.name,
@@ -47,15 +50,15 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse){
     }
     
     //check if there's a payment intent, update the order
-    if(payment_intend_id) {
+    if(payment_intent_id) {
         const current_intent = await stripe.paymentIntents.retrieve(
-            payment_intend_id
+            payment_intent_id
         )
 
         if(current_intent) {
             const updated_intent = await stripe.paymentIntents.update
             (
-                payment_intend_id,
+                payment_intent_id,
                 { amount: calculateOrderAmount(items) }
             )
             //get order with product ids
