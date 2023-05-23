@@ -6,6 +6,7 @@ import formatPrice from "@/util/PriceFormat"
 import {IoAddCircle, IoRemoveCircle} from 'react-icons/io5'
 import basket from "@/public/basket.png"
 import { motion, AnimatePresence } from 'framer-motion'
+import Checkout from "./Checkout"
 
 export default function Cart(){
     const cartStore = useCartStore()
@@ -28,6 +29,9 @@ export default function Cart(){
             className="bg-white absolute right-0 top-0 w-full h-screen p-12 overflow-y-scroll lg:w-2/5 text-slate-700"
             >
                 <button onClick={()=>cartStore.toggleCart()} className="text-sm font-bold pb-12">back to store</button>
+                {/* cart items */}
+                {cartStore.onCheckout === 'cart' && (
+                    <>
                 {cartStore.cart.map((item) => 
                 <motion.div layout key={item.id} className="flex py-4 gap-4">
                     <Image 
@@ -55,15 +59,21 @@ export default function Cart(){
                     </motion.div>
                 </motion.div>
                 )}
+                </>
+                )}
                 {/* checkout and total */}
                 {/* get the total price, hide if nothing is in the cart */}
                 {cartStore.cart.length > 0 && (
                 <motion.div layout>
                     <p>Total: {totalPrice && formatPrice(totalPrice)}</p>
                 {/* check out button, hide if nothing is in the cart */}
-                    <button className="py-2 mt-4 bg-teal-800 w-full rounded-md text-white">check out</button>
+                    <button onClick={() => cartStore.setCheckout('checkout')} className="py-2 mt-4 bg-teal-800 w-full rounded-md text-white">
+                        check out
+                    </button>
                 </motion.div>
                 )}
+                {/* checkout form */}
+                    {cartStore.onCheckout === 'checkout' && <Checkout />}
                 <AnimatePresence>
                 {/* display when cart is empty */}
                 {!cartStore.cart.length && (
