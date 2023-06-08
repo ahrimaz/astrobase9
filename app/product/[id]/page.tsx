@@ -14,6 +14,7 @@ export default async function Product({ searchParams }: SearchParamTypes) {
                 width={600}
                 height={600} 
                 className="w-full rounded-lg"
+                priority={true}
             />
             {/* output the data for product name and its description*/}
             <div className="font-medium">
