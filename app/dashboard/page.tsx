@@ -30,7 +30,7 @@ export default async function Dashboard(){
         <div>
             <div className="font-medium">
                 {orders?.map((order) => (
-                    <div key={order.id} className="rounded-lg p-8 my-4 space-y-2">
+                    <div key={order.id} className="rounded-lg p-8 my-4 space-y-2 bg-base-300">
                         <h2 className="text-xs font-medium">order reference: {order.id}</h2>
                         <p className="text-xs">Time: {new Date(order.createdDate).toString()}</p>
                         <p className="text-md py-2">

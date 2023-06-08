@@ -16,13 +16,13 @@ export default async function Product({ searchParams }: SearchParamTypes) {
                 className="w-full"
             />
             {/* output the data for product name and its description*/}
-            <div className="font-medium text-slate-700">
+            <div className="font-medium">
                 <h1 className="=text-2xl py-2">{searchParams.name}</h1>
                 <p className="py-2">{searchParams.description}</p>
                 <p className="py-2">{searchParams.features}</p>
             {/* use formatPrice imported from the util function, apply to unit_amount to get formatted price */}
             <div className="flex gap-2">
-                <p className="font-bold text-teal-800">
+                <p className="font-bold text-primary">
                     {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}
                 </p>
             </div>

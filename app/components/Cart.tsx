@@ -27,7 +27,7 @@ export default function Cart(){
          >
             {/* cart */}
             <motion.div layout onClick={(e) => e.stopPropagation()} 
-            className="bg-white absolute right-0 top-0 w-full h-screen p-12 overflow-y-scroll lg:w-2/5 text-slate-700"
+            className="bg-white absolute right-0 top-0 w-full h-screen p-12 overflow-y-scroll lg:w-2/5 "
             >
                 {cartStore.onCheckout === 'cart' && (
                 <button 
@@ -84,7 +84,7 @@ export default function Cart(){
                 {/* check out button, hide if nothing is in the cart */}
                     <button 
                         onClick={() => cartStore.setCheckout('checkout')} 
-                        className="py-2 mt-4 bg-teal-800 w-full rounded-md text-white"
+                        className="py-2 mt-4 bg-primary w-full rounded-md text-white"
                     >
                         check out
                     </button>
