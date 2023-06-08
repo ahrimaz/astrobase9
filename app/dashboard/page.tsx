@@ -53,8 +53,10 @@ export default async function Dashboard(){
                                         src={product.image!} 
                                         width={48} 
                                         height={48} 
-                                        alt={product.name}>
-                                        </Image>
+                                        alt={product.name}
+                                        priority={true} 
+                                        className='w-auto'
+                                        />
                                         <p>{formatPrice(product.unit_amount)}</p>
                                         <p>quantity: {product.quantity}</p>
                                     </div>
